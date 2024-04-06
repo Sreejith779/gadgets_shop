@@ -14,3 +14,6 @@ class HomeLoadedState extends HomeState{
       numberOfReviews: e['numberOfReviews'], description: e['description'])).toList();
 
 }
+
+
+class SearchLoadedState extends HomeState{}
