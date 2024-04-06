@@ -107,8 +107,8 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.white,
                                             fontSize: 25),
                                       ),
-                                    ),
-                                    Padding(
+                                     ),
+                                     Padding(
                                       padding:
                                           const EdgeInsets.only(top: 0, left: 20),
                                       child: Text(
@@ -191,52 +191,68 @@ class _HomePageState extends State<HomePage> {
                                         ));
                                   }),
                             ),
-                            GridView.count(
-                              shrinkWrap: true,
-                              crossAxisCount: 2,
-                              children: List.generate(
-                                  loadedState.model.length,
-                                  (index) => Column(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          width: double.maxFinite,
-                                              margin: EdgeInsets.all(10),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.withOpacity(0.2),
-                                                borderRadius: BorderRadius.circular(15)
-                                              ),
-                                          child: Image.network(loadedState.model[index].image.toString(),
-                                          height: MediaQuery.of(context).size.height*0.2,)
+                            SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    crossAxisCount: 2,
+                                    children: List.generate(
+                                        loadedState.model.length,
+                                        (index) => Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                width: double.maxFinite,
+                                                    margin: const EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey.withOpacity(0.2),
+                                                      borderRadius: BorderRadius.circular(15)
+                                                    ),
+                                                child: Image.network(loadedState.model[index].image.toString(),
+                                                height: MediaQuery.of(context).size.height*0.3,)
+                                                  ),
                                             ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 8),
-                                            child: Text(loadedState.model[index].name,
-                                            style: const TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500
-                                            ),),
-                                          ),
-                                          const Icon(Icons.star,
-                                          size: 25,
-                                          color: Colors.yellow,),
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 15),
-                                            child: Text(loadedState.model[index].rating.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600
-                                            ),),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  )
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 8),
+                                                  child: Text(loadedState.model[index].name,
+                                                  style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500
+                                                  ),),
+                                                ),
+                                                const Icon(Icons.star,
+                                                size: 25,
+                                                color: Colors.yellow,),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 15),
+                                                  child: Text(loadedState.model[index].rating.toString(),
+                                                  style: const TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.w600
+                                                  ),),
+                                                )
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 12),
+                                              child: Text("Rs ${loadedState.model[index].price.toString()}",
+                                              style:  TextStyle(
+                                                fontSize: 18,
+                                          fontFamily:  GoogleFonts.cambo().fontFamily,
+                                                fontWeight: FontWeight.w600
+                                              ),),
+                                            )
+                                          ],
+                                        )
+                                    ),
+                                  ),
+                                ],
                               ),
                             )
                           ],
