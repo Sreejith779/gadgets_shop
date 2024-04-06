@@ -26,6 +26,9 @@ class _RoutesState extends State<Routes> {
 
     return  Scaffold(
 bottomNavigationBar: NavigationBar(
+  height: 45,
+  backgroundColor: Colors.white,
+  elevation: 0,
   selectedIndex: isSelect,
    onDestinationSelected: (index){
     setState(() {
