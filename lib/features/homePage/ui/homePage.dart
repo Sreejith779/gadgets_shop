@@ -62,8 +62,11 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.grey.withOpacity(0.1),
                       ),
-                      child: const TextField(
-                          decoration: InputDecoration(
+                      child:  TextField(
+onChanged: (value){
+  homeBloc.add (SearchTextChangedEvent(searchTextChanged: value));
+},
+                          decoration: const InputDecoration(
                               hintText: "Search",
                               suffixIcon: Icon(
                                 Icons.search_outlined,
@@ -227,13 +230,13 @@ class _HomePageState extends State<HomePage> {
                                                   ),),
                                                 ),
                                                 const Icon(Icons.star,
-                                                size: 25,
+                                                size: 15,
                                                 color: Colors.yellow,),
                                                 Padding(
                                                   padding: const EdgeInsets.only(right: 15),
                                                   child: Text(loadedState.model[index].rating.toString(),
                                                   style: const TextStyle(
-                                                    fontSize: 17,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.w600
                                                   ),),
                                                 )
@@ -243,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                                               padding: const EdgeInsets.only(left: 12),
                                               child: Text("Rs ${loadedState.model[index].price.toString()}",
                                               style:  TextStyle(
-                                                fontSize: 18,
+                                                fontSize: 17,
                                           fontFamily:  GoogleFonts.cambo().fontFamily,
                                                 fontWeight: FontWeight.w600
                                               ),),
@@ -263,6 +266,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             );
+
 
           default:
             return const Center(

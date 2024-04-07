@@ -12,3 +12,9 @@ class SearchEvent extends HomeEvent{
   SearchEvent({required this.word});
 
 }
+
+class SearchTextChangedEvent extends HomeEvent{
+  final String searchTextChanged;
+
+  SearchTextChangedEvent({required this.searchTextChanged});
+}
