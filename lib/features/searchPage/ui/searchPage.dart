@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Cart",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600
+        ),),
+        backgroundColor: Colors.deepPurple,
+      ),
+    );
   }
 }

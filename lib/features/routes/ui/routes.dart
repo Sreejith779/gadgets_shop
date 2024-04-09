@@ -17,8 +17,8 @@ class _RoutesState extends State<Routes> {
   var isSelect = 0;
   final tabs = [
     HomePage(),
-    SearchPage(),
     FavoritePage(),
+    CartPage(),
     ProfilePage(),
   ];
   @override
@@ -37,8 +37,8 @@ bottomNavigationBar: NavigationBar(
    },
    destinations: const [
   NavigationDestination(icon:Icon(Icons.home,color: Colors.black,), label: "Home"),
-  NavigationDestination(icon:Icon(Icons.search_outlined,color: Colors.black,), label: "Search"),
   NavigationDestination(icon:Icon(Icons.favorite,color: Colors.black,), label: "Favorite"),
+     NavigationDestination(icon:Icon(Icons.shopping_bag_outlined,color: Colors.black,), label: "Cart"),
   NavigationDestination(icon: Icon(Icons.person,color: Colors.black,), label: "Profile")
 ],
   

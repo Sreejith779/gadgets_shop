@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   var _searchQuery = '';
 
   @override
@@ -39,20 +38,23 @@ class _HomePageState extends State<HomePage> {
         switch (state.runtimeType) {
           case HomeLoadedState:
             final loadedState = state as HomeLoadedState;
-            final filteredList = _searchQuery.isEmpty?loadedState.model:
-                loadedState.model.where((element) =>
-                    element.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
+            final filteredList = _searchQuery.isEmpty
+                ? loadedState.model
+                : loadedState.model
+                    .where((element) => element.name
+                        .toLowerCase()
+                        .contains(_searchQuery.toLowerCase()))
+                    .toList();
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
                 title: const Text("Discover"),
                 actions: [
                   InkWell(
-                    onTap: (){},
+                    onTap: () {},
                     child: Container(
                       child: Stack(
                         children: [
-
                           CircleAvatar(
                             child: IconButton(
                               onPressed: () {},
@@ -87,12 +89,12 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.grey.withOpacity(0.1),
                       ),
-                      child:  TextField(
-onChanged: (value){
-setState(() {
-  _searchQuery = value;
-});
-},
+                      child: TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              _searchQuery = value;
+                            });
+                          },
                           decoration: const InputDecoration(
                               hintText: "Search",
                               suffixIcon: Icon(
@@ -109,17 +111,19 @@ setState(() {
                           children: [
                             Stack(children: [
                               Container(
-                                height: MediaQuery.of(context).size.height * 0.2,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
                                 width: double.maxFinite,
                                 decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.4),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
-                                    ),
-                                  ],
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.4),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
                                     color: Colors.deepPurple,
                                     borderRadius: BorderRadius.circular(18)),
                                 margin: const EdgeInsets.only(top: 30),
@@ -132,21 +136,21 @@ setState(() {
                                       child: Text(
                                         "Clearance",
                                         style: TextStyle(
-                                            fontFamily:
-                                                GoogleFonts.adamina().fontFamily,
+                                            fontFamily: GoogleFonts.adamina()
+                                                .fontFamily,
                                             color: Colors.white,
                                             fontSize: 25),
                                       ),
-                                     ),
-                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(top: 0, left: 20),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0, left: 20),
                                       child: Text(
                                         "Sale",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily:
-                                                GoogleFonts.adamina().fontFamily,
+                                            fontFamily: GoogleFonts.adamina()
+                                                .fontFamily,
                                             fontSize: 25),
                                       ),
                                     ),
@@ -156,7 +160,8 @@ setState(() {
                                         height: 38,
                                         width: 120,
                                         decoration: BoxDecoration(
-                                            color: Colors.white.withOpacity(0.8),
+                                            color:
+                                                Colors.white.withOpacity(0.8),
                                             borderRadius:
                                                 BorderRadius.circular(18)),
                                         child: const Center(
@@ -188,12 +193,14 @@ setState(() {
                                 Text(
                                   "Categories",
                                   style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.w500),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 Text(
                                   "See all",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500, fontSize: 15),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15),
                                 ),
                               ],
                             ),
@@ -208,88 +215,134 @@ setState(() {
                                   itemBuilder: (context, index) {
                                     return Container(
                                         padding: const EdgeInsets.all(5),
-                                        margin: const EdgeInsets.only(right: 18),
+                                        margin:
+                                            const EdgeInsets.only(right: 18),
                                         decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.15),
+                                            color:
+                                                Colors.grey.withOpacity(0.15),
                                             borderRadius:
                                                 BorderRadius.circular(7)),
                                         child: Text(
                                           loadedState.model[index].category,
                                           style: const TextStyle(
-                                            fontSize: 14,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                         ));
                                   }),
                             ),
-                            SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    crossAxisCount: 2,
-                                    children: List.generate(
-                                        filteredList.length,
-                                        (index) => InkWell(
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                            ProductPage(product: filteredList[index],)));
-                                          },
+                            GridView.count(
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              children: List.generate(
+                                  filteredList.length,
+                                  (index) => InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProductPage(
+                                                        product:
+                                                            filteredList[index],
+                                                      )));
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              bottom: 0, right: 15, top: 10),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Expanded(
                                                 child: Container(
-                                                  width: double.maxFinite,
-                                                      margin: const EdgeInsets.all(10),
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.grey.withOpacity(0.2),
-                                                        borderRadius: BorderRadius.circular(15)
-                                                      ),
-                                                  child: Image.network(filteredList[index].image.toString(),
-                                                  height: MediaQuery.of(context).size.height*0.3,)
-                                                    ),
+                                                    width: double.maxFinite,
+                                                    // margin: const EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.2),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                    child: Image.network(
+                                                      filteredList[index]
+                                                          .image
+                                                          .toString(),
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.15,
+                                                    )),
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8),
-                                                    child: Text(filteredList[index].name,
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.w500
-                                                    ),),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text(
+                                                        filteredList[index].name,
+                                                        style: const TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  const Icon(Icons.star,
-                                                  size: 15,
-                                                  color: Colors.yellow,),
+                                                  const Icon(
+                                                    Icons.star,
+                                                    size: 15,
+                                                    color: Colors.yellow,
+                                                  ),
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 15),
-                                                    child: Text(filteredList[index].rating.toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.w600
-                                                    ),),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
+                                                    child: Text(
+                                                      filteredList[index]
+                                                          .rating
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
                                                   )
                                                 ],
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 12),
-                                                child: Text("Rs ${filteredList[index].price.toString()}",
-                                                style:  TextStyle(
-                                                  fontSize: 17,
-                                            fontFamily:  GoogleFonts.cambo().fontFamily,
-                                                  fontWeight: FontWeight.w600
-                                                ),),
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 12),
+                                                    child: Text(
+                                                      "Rs ${filteredList[index].price.toString()}",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontFamily:
+                                                              GoogleFonts
+                                                                      .cambo()
+                                                                  .fontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {},
+                                                      icon: const Icon(Icons
+                                                          .shopping_bag_outlined))
+                                                ],
                                               )
                                             ],
                                           ),
-                                        )
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                        ),
+                                      )),
                             )
                           ],
                         ),
@@ -300,10 +353,9 @@ setState(() {
               ),
             );
 
-
           default:
             return const Center(
-              child: Text("Error"),
+              child: CircularProgressIndicator(),
             );
         }
       },
