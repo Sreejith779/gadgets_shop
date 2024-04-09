@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gadgets_shoop/features/productPage/ui/ProductPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/home_bloc.dart';
@@ -14,6 +15,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  var _searchQuery = '';
+
   @override
   void initState() {
     homeBloc.add(HomeInitialEvent());
@@ -35,15 +39,36 @@ class _HomePageState extends State<HomePage> {
         switch (state.runtimeType) {
           case HomeLoadedState:
             final loadedState = state as HomeLoadedState;
+            final filteredList = _searchQuery.isEmpty?loadedState.model:
+                loadedState.model.where((element) =>
+                    element.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
                 title: const Text("Discover"),
                 actions: [
-                  CircleAvatar(
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.shopping_bag_outlined),
+                  InkWell(
+                    onTap: (){},
+                    child: Container(
+                      child: Stack(
+                        children: [
+
+                          CircleAvatar(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.shopping_bag_outlined),
+                            ),
+                          ),
+                          const Positioned(
+                            left: 20,
+                            top: 0,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.deepPurple,
+                              radius: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -64,7 +89,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child:  TextField(
 onChanged: (value){
-  homeBloc.add (SearchTextChangedEvent(searchTextChanged: value));
+setState(() {
+  _searchQuery = value;
+});
 },
                           decoration: const InputDecoration(
                               hintText: "Search",
@@ -181,7 +208,7 @@ onChanged: (value){
                                   itemBuilder: (context, index) {
                                     return Container(
                                         padding: const EdgeInsets.all(5),
-                                        margin: const EdgeInsets.only(right: 15),
+                                        margin: const EdgeInsets.only(right: 18),
                                         decoration: BoxDecoration(
                                             color: Colors.grey.withOpacity(0.15),
                                             borderRadius:
@@ -189,7 +216,7 @@ onChanged: (value){
                                         child: Text(
                                           loadedState.model[index].category,
                                           style: const TextStyle(
-                                            fontSize: 17,
+                                            fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                         ));
                                   }),
@@ -201,57 +228,63 @@ onChanged: (value){
                                     shrinkWrap: true,
                                     crossAxisCount: 2,
                                     children: List.generate(
-                                        loadedState.model.length,
-                                        (index) => Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                width: double.maxFinite,
-                                                    margin: const EdgeInsets.all(10),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey.withOpacity(0.2),
-                                                      borderRadius: BorderRadius.circular(15)
+                                        filteredList.length,
+                                        (index) => InkWell(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                            ProductPage(product: filteredList[index],)));
+                                          },
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  width: double.maxFinite,
+                                                      margin: const EdgeInsets.all(10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.grey.withOpacity(0.2),
+                                                        borderRadius: BorderRadius.circular(15)
+                                                      ),
+                                                  child: Image.network(filteredList[index].image.toString(),
+                                                  height: MediaQuery.of(context).size.height*0.3,)
                                                     ),
-                                                child: Image.network(loadedState.model[index].image.toString(),
-                                                height: MediaQuery.of(context).size.height*0.3,)
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 8),
+                                                    child: Text(filteredList[index].name,
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.w500
+                                                    ),),
                                                   ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8),
-                                                  child: Text(loadedState.model[index].name,
-                                                  style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500
-                                                  ),),
-                                                ),
-                                                const Icon(Icons.star,
-                                                size: 15,
-                                                color: Colors.yellow,),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(right: 15),
-                                                  child: Text(loadedState.model[index].rating.toString(),
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600
-                                                  ),),
-                                                )
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 12),
-                                              child: Text("Rs ${loadedState.model[index].price.toString()}",
-                                              style:  TextStyle(
-                                                fontSize: 17,
-                                          fontFamily:  GoogleFonts.cambo().fontFamily,
-                                                fontWeight: FontWeight.w600
-                                              ),),
-                                            )
-                                          ],
+                                                  const Icon(Icons.star,
+                                                  size: 15,
+                                                  color: Colors.yellow,),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(right: 15),
+                                                    child: Text(filteredList[index].rating.toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w600
+                                                    ),),
+                                                  )
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 12),
+                                                child: Text("Rs ${filteredList[index].price.toString()}",
+                                                style:  TextStyle(
+                                                  fontSize: 17,
+                                            fontFamily:  GoogleFonts.cambo().fontFamily,
+                                                  fontWeight: FontWeight.w600
+                                                ),),
+                                              )
+                                            ],
+                                          ),
                                         )
                                     ),
                                   ),

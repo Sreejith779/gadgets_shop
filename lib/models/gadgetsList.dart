@@ -7,6 +7,7 @@ List<Map<String, dynamic>> electronicGadgets = [
     'rating': 4.5,
     'likesPercentage': 92,
     'numberOfReviews': 1000,
+    'sale': '% On sale',
     'description': 'The iPhone 13 Pro features a stunning Super Retina XDR display, advanced A15 Bionic chip, and pro camera system.',
   },
   {
@@ -17,6 +18,7 @@ List<Map<String, dynamic>> electronicGadgets = [
     'rating': 4.8,
     'likesPercentage': 95,
     'numberOfReviews': 800,
+    'sale': '% On sale',
     'description': 'The MacBook Pro is a powerful laptop with M1 Pro or M1 Max chip, Liquid Retina XDR display, and up to 64GB of memory.',
   },
   {
@@ -27,6 +29,7 @@ List<Map<String, dynamic>> electronicGadgets = [
     'rating': 4.7,
     'likesPercentage': 94,
     'numberOfReviews': 600,
+    'sale': '% On sale',
     'description': 'The Apple Watch Series 7 features a larger, always-on display, advanced health tracking, and fast charging.',
   },
   {
@@ -37,6 +40,7 @@ List<Map<String, dynamic>> electronicGadgets = [
     'rating': 4.6,
     'likesPercentage': 91,
     'numberOfReviews': 500,
+    'sale': '% On sale',
     'description': 'The iPad Air offers a stunning Liquid Retina display, powerful A14 Bionic chip, and support for Apple Pencil and Magic Keyboard.',
   },
   {
@@ -47,6 +51,7 @@ List<Map<String, dynamic>> electronicGadgets = [
     'rating': 4.9,
     'likesPercentage': 98,
     'numberOfReviews': 1200,
+    'sale': '% On sale',
     'description': 'The Sony WH-1000XM4 headphones deliver industry-leading noise cancellation, premium sound quality, and long battery life.',
   },
 
