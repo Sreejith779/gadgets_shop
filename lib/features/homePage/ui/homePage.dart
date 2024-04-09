@@ -50,28 +50,35 @@ class _HomePageState extends State<HomePage> {
               appBar: AppBar(
                 title: const Text("Discover"),
                 actions: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      child: Stack(
-                        children: [
-                          CircleAvatar(
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.shopping_bag_outlined),
-                            ),
-                          ),
-                          const Positioned(
-                            left: 20,
-                            top: 0,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.deepPurple,
-                              radius: 10,
-                            ),
-                          ),
-                        ],
+                  Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 25,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.shopping_bag_outlined),
+                        ),
                       ),
-                    ),
+                       Badge(
+backgroundColor: Colors.redAccent.withOpacity(0.8),
+                        smallSize:30,
+                         child: Positioned(
+                           top: 1,
+                           child: Text("11",style: TextStyle(
+                             color: Colors.black,
+                             fontWeight: FontWeight.bold
+                           ),),
+                         ),
+                      )
+                      // const Positioned(
+                      //   left: 20,
+                      //   top: 0,
+                      //   child: CircleAvatar(
+                      //     backgroundColor: Colors.deepPurple,
+                      //     radius: 10,
+                      //   ),
+                      // ),
+                    ],
                   ),
                   const SizedBox(
                     width: 10,
@@ -334,7 +341,9 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                   ),
                                                   IconButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        homeBloc.add(CartIconClickedEvent(product: loadedState.model[index]));
+                                                      },
                                                       icon: const Icon(Icons
                                                           .shopping_bag_outlined))
                                                 ],

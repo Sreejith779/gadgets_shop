@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gadgets_shoop/features/favoritePage/ui/favoritePage.dart';
 import 'package:gadgets_shoop/features/homePage/ui/homePage.dart';
 import 'package:gadgets_shoop/features/profile/ui/profilePage.dart';
-import 'package:gadgets_shoop/features/searchPage/ui/searchPage.dart';
+
+
+import '../../cartPage/ui/searchPage.dart';
 
 
 class Routes extends StatefulWidget {

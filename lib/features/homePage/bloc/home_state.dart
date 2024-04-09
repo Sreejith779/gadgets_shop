@@ -21,3 +21,5 @@ class HomeLoadedState extends HomeState {
           sale: e['sale']))
       .toList();
 }
+
+class CartIconClickedActionState extends HomeActionState{}

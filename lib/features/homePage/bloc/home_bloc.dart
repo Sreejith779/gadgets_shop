@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:gadgets_shoop/models/cartList.dart';
 import 'package:gadgets_shoop/models/gadgetsList.dart';
 import 'package:meta/meta.dart';
 
@@ -12,6 +13,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialEvent>(homeInitialEvent);
+    on<CartIconClickedEvent>(cartIconClickedEvent);
 
   }
 
@@ -20,4 +22,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
 
+
+  FutureOr<void> cartIconClickedEvent(CartIconClickedEvent event, Emitter<HomeState> emit) {
+
+print("Product clicked");
+cartItems.add(event.product);
+emit(CartIconClickedActionState());
+
+  }
 }
