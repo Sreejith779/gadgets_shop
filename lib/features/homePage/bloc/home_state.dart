@@ -20,6 +20,8 @@ class HomeLoadedState extends HomeState {
           description: e['description'],
           sale: e['sale']))
       .toList();
+final List<GadgetModel>items = cartItems;
 }
 
 class CartIconClickedActionState extends HomeActionState{}
+class CartNavigateActionState extends HomeActionState{}

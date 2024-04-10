@@ -1,3 +1,3 @@
 import 'gadgetModel.dart';
 
-final List<GadgetModel>cartItems = [];
+ List<GadgetModel>cartItems = [];

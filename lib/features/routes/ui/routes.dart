@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gadgets_shoop/features/favoritePage/ui/favoritePage.dart';
 import 'package:gadgets_shoop/features/homePage/ui/homePage.dart';
 import 'package:gadgets_shoop/features/profile/ui/profilePage.dart';
 
 
-import '../../cartPage/ui/searchPage.dart';
+import '../../cartPage/ui/cartPage.dart';
 
 
 class Routes extends StatefulWidget {
@@ -28,6 +29,7 @@ class _RoutesState extends State<Routes> {
 
     return  Scaffold(
 bottomNavigationBar: NavigationBar(
+indicatorColor: Colors.grey.withOpacity(0.2),
   height: 55,
   backgroundColor: Colors.white60,
   elevation: 0,
@@ -37,13 +39,16 @@ bottomNavigationBar: NavigationBar(
       isSelect = index;
     });
    },
-   destinations: const [
-  NavigationDestination(icon:Icon(Icons.home,color: Colors.black,), label: "Home"),
-  NavigationDestination(icon:Icon(Icons.favorite,color: Colors.black,), label: "Favorite"),
-     NavigationDestination(icon:Icon(Icons.shopping_bag_outlined,color: Colors.black,), label: "Cart"),
-  NavigationDestination(icon: Icon(Icons.person,color: Colors.black,), label: "Profile")
+   destinations:  [
+  NavigationDestination(icon:Image.asset("assets/home1.png",
+  width: 20,height: 25,), label: "Home"),
+  NavigationDestination(icon:Image.asset("assets/heart.png",
+    width: 20,height: 25,), label: "Favorite"),
+     NavigationDestination(icon:Image.asset("assets/cart.png",
+       width: 20,height: 25,), label: "Cart"),
+  NavigationDestination(icon:Image.asset("assets/user.png",
+    width: 20,height: 25,) , label: "Profile")
 ],
-  
 ),
 body: tabs[isSelect],
     );

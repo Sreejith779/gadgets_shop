@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gadgets_shoop/features/cartPage/ui/cartPage.dart';
 import 'package:gadgets_shoop/features/productPage/bloc/product_bloc.dart';
 import 'package:gadgets_shoop/models/gadgetModel.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,6 +43,12 @@ class _ProductPageState extends State<ProductPage> {
             duration: Duration(milliseconds: 350),
             backgroundColor: Colors.red,
           ));
+        }else if(state is AddButtonActionState){
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text("Item Added Sucessfully")));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>
+          const CartPage()));
         }
       },
       builder: (context, state) {
@@ -258,20 +265,25 @@ class _ProductPageState extends State<ProductPage> {
                               style: const TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.w600),
                             ),
-                            Container(
-                              height: 60,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(18)),
-                              child: const Center(
-                                  child: Text(
-                                "Add to Cart",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700),
-                              )),
+                            InkWell(
+                              onTap: (){
+                                productBloc.add(CartNavigateEvent(clickedProduct: widget.product));
+                              },
+                              child: Container(
+                                height: 60,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                    color: Colors.deepPurple,
+                                    borderRadius: BorderRadius.circular(18)),
+                                child: const Center(
+                                    child: Text(
+                                  "Add to Cart",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                )),
+                              ),
                             )
                           ],
                         ),

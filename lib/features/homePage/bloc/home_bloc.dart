@@ -14,20 +14,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialEvent>(homeInitialEvent);
     on<CartIconClickedEvent>(cartIconClickedEvent);
-
+    on<CartNavigateEvent>(cartNavigateEvent);
   }
 
-  FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> homeInitialEvent(
+      HomeInitialEvent event, Emitter<HomeState> emit) {
     emit(HomeLoadedState());
   }
 
+  FutureOr<void> cartIconClickedEvent(
+      CartIconClickedEvent event, Emitter<HomeState> emit) {
+    print("Product clicked");
+    cartItems.add(event.product);
+    emit(CartIconClickedActionState());
+    emit(HomeLoadedState());
+  }
 
-
-  FutureOr<void> cartIconClickedEvent(CartIconClickedEvent event, Emitter<HomeState> emit) {
-
-print("Product clicked");
-cartItems.add(event.product);
-emit(CartIconClickedActionState());
-
+  FutureOr<void> cartNavigateEvent(CartNavigateEvent event, Emitter<HomeState> emit) {
+    emit(CartNavigateActionState());
   }
 }

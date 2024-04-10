@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:gadgets_shoop/features/cartPage/ui/cartPage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gadgets_shoop/features/productPage/ui/ProductPage.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:badges/badges.dart' as badges;
 
 import '../bloc/home_bloc.dart';
 
@@ -32,7 +33,14 @@ class _HomePageState extends State<HomePage> {
       listenWhen: (previous, current) => (current is HomeActionState),
       buildWhen: (previous, current) => (current is! HomeActionState),
       listener: (context, state) {
-        // TODO: implement listener
+       if(state is CartNavigateActionState){
+         ScaffoldMessenger.of(context).showSnackBar(
+             const SnackBar(
+                 backgroundColor: Colors.green,
+                 content: Text("Item added to Cart")));
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>
+         const CartPage()));
+       }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -48,40 +56,38 @@ class _HomePageState extends State<HomePage> {
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
-                title: const Text("Discover"),
-                actions: [
-                  Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.shopping_bag_outlined),
-                        ),
-                      ),
-                       Badge(
-backgroundColor: Colors.redAccent.withOpacity(0.8),
-                        smallSize:30,
-                         child: Positioned(
-                           top: 1,
-                           child: Text("11",style: TextStyle(
-                             color: Colors.black,
-                             fontWeight: FontWeight.bold
-                           ),),
-                         ),
-                      )
-                      // const Positioned(
-                      //   left: 20,
-                      //   top: 0,
-                      //   child: CircleAvatar(
-                      //     backgroundColor: Colors.deepPurple,
-                      //     radius: 10,
-                      //   ),
-                      // ),
-                    ],
+                backgroundColor: Colors.transparent,
+                toolbarHeight: 70,
+                title: Text(
+                  "Discover",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: GoogleFonts.adamina().fontFamily,
                   ),
+                ),
+                actions: [
+                  badges.Badge(
+                      position: badges.BadgePosition.topEnd(top: -10, end: -5),
+                      badgeContent: Text(
+                        loadedState.items.length.toString(),
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w600),
+                      ),
+                      badgeStyle: const badges.BadgeStyle(
+                          badgeColor: Colors.deepPurple),
+                      child: IconButton(
+                        onPressed: () {
+                        homeBloc.add(CartNavigateEvent());
+                        },
+                        icon: Image.asset(
+                          "assets/cart.png",
+                          width: 30,
+                          height: 30,
+                        ),
+                      )),
                   const SizedBox(
-                    width: 10,
+                    width: 15,
                   )
                 ],
               ),
@@ -127,7 +133,7 @@ backgroundColor: Colors.redAccent.withOpacity(0.8),
                                         color: Colors.grey.withOpacity(0.4),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       ),
                                     ],
@@ -281,10 +287,11 @@ backgroundColor: Colors.redAccent.withOpacity(0.8),
                                                               0.15,
                                                     )),
                                               ),
+
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
-                                                        .spaceEvenly,
+                                                        .spaceBetween,
                                                 children: [
                                                   Expanded(
                                                     child: Padding(
@@ -292,12 +299,14 @@ backgroundColor: Colors.redAccent.withOpacity(0.8),
                                                           const EdgeInsets.only(
                                                               left: 5),
                                                       child: Text(
-                                                        filteredList[index].name,
+                                                        filteredList[index]
+                                                            .name,
                                                         style: const TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.w500),
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                     ),
                                                   ),
@@ -342,10 +351,17 @@ backgroundColor: Colors.redAccent.withOpacity(0.8),
                                                   ),
                                                   IconButton(
                                                       onPressed: () {
-                                                        homeBloc.add(CartIconClickedEvent(product: loadedState.model[index]));
+                                                        homeBloc.add(
+                                                            CartIconClickedEvent(
+                                                                product: loadedState
+                                                                        .model[
+                                                                    index]));
                                                       },
-                                                      icon: const Icon(Icons
-                                                          .shopping_bag_outlined))
+                                                      icon: Image.asset(
+                                                        "assets/cart2.png",
+                                                        width: 25,
+                                                        height: 20,
+                                                      ))
                                                 ],
                                               )
                                             ],

@@ -10,4 +10,5 @@ class CartIconClickedEvent extends HomeEvent{
 
   CartIconClickedEvent({required this.product});
 }
+class CartNavigateEvent extends HomeEvent{}
 

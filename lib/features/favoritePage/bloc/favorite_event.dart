@@ -10,3 +10,9 @@ class ProductNavigateEvent extends FavoriteEvent{
 
   ProductNavigateEvent({required this.product});
 }
+
+class ProductDeleteEvent extends FavoriteEvent{
+  final GadgetModel deleteProduct;
+
+  ProductDeleteEvent({required this.deleteProduct});
+}

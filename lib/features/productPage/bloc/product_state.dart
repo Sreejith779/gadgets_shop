@@ -9,3 +9,5 @@ abstract class ProductActionState extends ProductState{}
 class FavoriteButtonClickedActionState extends ProductActionState{}
 
 class FavoriteButtonRemoveActionState extends ProductActionState{}
+
+class AddButtonActionState extends ProductActionState{}

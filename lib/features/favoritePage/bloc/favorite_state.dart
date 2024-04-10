@@ -14,3 +14,5 @@ class FavoriteLoadedState extends FavoriteState{
 }
 
 class ProductNavigatedActionState extends FavoriteActionState{}
+
+

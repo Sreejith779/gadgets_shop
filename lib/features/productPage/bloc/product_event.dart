@@ -15,3 +15,8 @@ class FavoriteButtonRemoveEvent extends ProductEvent{
 
   FavoriteButtonRemoveEvent({required this.clickedProduct});
 }
+class CartNavigateEvent extends ProductEvent{
+  final GadgetModel clickedProduct;
+
+  CartNavigateEvent({required this.clickedProduct});
+}
