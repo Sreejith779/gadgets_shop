@@ -34,12 +34,14 @@ class _HomePageState extends State<HomePage> {
       buildWhen: (previous, current) => (current is! HomeActionState),
       listener: (context, state) {
        if(state is CartNavigateActionState){
+
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>
+         const CartPage()));
+       }else if(state is CartIconClickedActionState){
          ScaffoldMessenger.of(context).showSnackBar(
              const SnackBar(
                  backgroundColor: Colors.green,
                  content: Text("Item added to Cart")));
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>
-         const CartPage()));
        }
       },
       builder: (context, state) {

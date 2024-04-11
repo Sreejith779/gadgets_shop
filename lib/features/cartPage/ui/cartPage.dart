@@ -145,8 +145,8 @@ class _CartPageState extends State<CartPage> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              left: 40,
-                                                              right: 5),
+                                                              left: 30,
+                                                              right: 10),
                                                       child: Align(
                                                         alignment: Alignment
                                                             .bottomRight,
@@ -167,11 +167,12 @@ class _CartPageState extends State<CartPage> {
                                                       ),
                                                     ),
                                                   ],
+
                                                 ),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 20, right: 120),
+                                                          left: 20, right: 110),
                                                   child: Align(
                                                     alignment:
                                                         Alignment.topLeft,
@@ -276,7 +277,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(20),
-                            height: 100,
+                            height: 80,
                             decoration: BoxDecoration(
                                 color: Colors.deepPurple.withOpacity(0.8),
                                 borderRadius: const BorderRadius.only(

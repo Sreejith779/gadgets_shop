@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -236,34 +237,27 @@ class _ProductPageState extends State<ProductPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Text(
-                          widget.product.description,
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Text(
+                            widget.product.description,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 70),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      width: 2,
-                                      color: Colors.grey.withOpacity(0.2)))),
-                        ),
-                      ),
+                    Divider(),
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 40, left: 20, right: 20),
+                            const EdgeInsets.only(top: 5, left: 20, right: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               "Rs ${widget.product.price.toString()}",
                               style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w600),
+                                  fontSize: 22, fontWeight: FontWeight.w600),
                             ),
                             InkWell(
                               onTap: (){
